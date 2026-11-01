@@ -1,4 +1,5 @@
 import { headers } from "next/headers";
+import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { and, eq } from "drizzle-orm";
 import { KeyRound, MessageSquarePlus, Video } from "lucide-react";
@@ -42,9 +43,25 @@ export default async function WorkspacePage({ params }) {
     )
     .limit(1);
 
-  if (!membership) {
+  let workspace = membership;
+
+  if (!workspace && session.user.role === "admin") {
+    const [org] = await db
+      .select({ organizationId: organization.id, name: organization.name })
+      .from(organization)
+      .where(eq(organization.slug, orgSlug))
+      .limit(1);
+    workspace = org ? { ...org, role: null } : undefined;
+  }
+
+  if (!workspace) {
     notFound();
   }
+
+  const isPlatformAdmin = session.user.role === "admin";
+  const roleLabel = workspace.role
+    ? (roleLabels[workspace.role] ?? workspace.role)
+    : "Administrador da plataforma (acesso total)";
 
   const nextSteps = [
     {
@@ -73,12 +90,20 @@ export default async function WorkspacePage({ params }) {
             <span aria-hidden="true" className="text-border">
               /
             </span>
-            <span className="text-sm font-medium">{membership.name}</span>
+            <span className="text-sm font-medium">{workspace.name}</span>
           </div>
           <div className="flex items-center gap-3">
             <span className="hidden text-sm text-muted-foreground sm:block">
               {session.user.email}
             </span>
+            {isPlatformAdmin ? (
+              <Link
+                href="/admin"
+                className="text-sm font-medium text-primary hover:underline"
+              >
+                Admin
+              </Link>
+            ) : null}
             <SignOutButton />
           </div>
         </div>
@@ -90,15 +115,20 @@ export default async function WorkspacePage({ params }) {
             /app/{orgSlug}
           </p>
           <h1 className="mt-2 text-h1 font-semibold tracking-tight">
-            {membership.name}
+            {workspace.name}
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
             Você entrou como{" "}
-            <span className="font-medium text-foreground">
-              {roleLabels[membership.role] ?? membership.role}
-            </span>{" "}
+            <span className="font-medium text-foreground">{roleLabel}</span>{" "}
             neste workspace.
           </p>
+
+          {isPlatformAdmin && !workspace.role ? (
+            <p className="mt-4 rounded-md border border-warning/40 bg-warning/10 px-3 py-2 text-sm text-foreground">
+              Acesso de administrador da plataforma: você não é membro deste
+              workspace, mas pode visualizar e alterar os dados dele.
+            </p>
+          ) : null}
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
             <div className="rounded-lg border border-border bg-card p-5">
@@ -115,13 +145,13 @@ export default async function WorkspacePage({ params }) {
                 <div className="flex justify-between gap-4">
                   <dt className="text-muted-foreground">Papel</dt>
                   <dd className="font-medium">
-                    {roleLabels[membership.role] ?? membership.role}
+                    {roleLabel}
                   </dd>
                 </div>
                 <div className="flex justify-between gap-4">
                   <dt className="text-muted-foreground">ID do workspace</dt>
                   <dd className="font-mono text-xs">
-                    {membership.organizationId.slice(0, 12)}…
+                    {workspace.organizationId.slice(0, 12)}…
                   </dd>
                 </div>
               </dl>

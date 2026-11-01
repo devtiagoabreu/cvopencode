@@ -55,7 +55,7 @@ download or regeneration.
 - [x] Architecture
 - [x] Design system
 - [x] Frontend scaffolding (App Router, tokens, landing, auth placeholders)
-- [ ] Authentication and tenancy (e-mail+senha e organizações funcionando; RLS, verificação de e-mail e convites pendentes)
+- [ ] Authentication and tenancy (e-mail+senha, organizações e painel `/admin` funcionando; RLS, verificação de e-mail e convites pendentes)
 - [ ] Client cache, outbox and OPFS media store
 - [ ] Chats, prompts, agents, skills and contexts
 - [ ] Generation jobs and sync

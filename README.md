@@ -41,3 +41,10 @@ npm run dev
 `npm run lint` e `npm run build` validam o projeto. O schema vive em
 `lib/db/schema.js` (gerado pelo Better Auth) e as migrations em
 `db/migrations/`; use `npm run db:generate` após mudanças de schema.
+
+Para promover uma conta a administrador da plataforma (acesso a todos os
+workspaces em `/admin`):
+
+```bash
+node --env-file=.env.local scripts/create-admin.mjs email@exemplo.com senha
+```
