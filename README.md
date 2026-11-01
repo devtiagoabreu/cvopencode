@@ -24,17 +24,20 @@ navegador.
 
 ## Status
 
-Fase de desenvolvimento. A base do app (App Router, tokens de design, landing e
-páginas de autenticação provisórias) está de pé; autenticação, studio e
-sincronização são os próximos passos. Veja o checklist em
-[doc/README.md](doc/README.md#status).
+Fase de desenvolvimento. Landing, autenticação por e-mail/senha (Better Auth),
+organizações multi-tenant e página protegida do workspace funcionam. Studio,
+RLS, verificação de e-mail e convites são os próximos passos. Veja o checklist
+em [doc/README.md](doc/README.md#status).
 
 ## Desenvolvimento
 
 ```bash
 npm install
-cp .env.example .env.local   # preencha as chaves
+cp .env.example .env.local    # preencha DATABASE_URL e os segredos
+npm run db:migrate            # aplica as migrations do Drizzle
 npm run dev
 ```
 
-`npm run lint` e `npm run build` validam o projeto.
+`npm run lint` e `npm run build` validam o projeto. O schema vive em
+`lib/db/schema.js` (gerado pelo Better Auth) e as migrations em
+`db/migrations/`; use `npm run db:generate` após mudanças de schema.

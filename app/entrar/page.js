@@ -1,4 +1,4 @@
-import { AuthShell } from "@/components/auth-shell";
+import { AuthForm } from "@/components/auth-form";
 
 export const metadata = {
   title: "Entrar",
@@ -6,10 +6,5 @@ export const metadata = {
 };
 
 export default function EntrarPage() {
-  return (
-    <AuthShell
-      title="Entrar"
-      description="A autenticação usa Better Auth com sessão no Neon. Enquanto ela não é publicada, a área da conta fica fechada."
-    />
-  );
+  return <AuthForm mode="signin" />;
 }

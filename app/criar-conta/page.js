@@ -1,4 +1,4 @@
-import { AuthShell } from "@/components/auth-shell";
+import { AuthForm } from "@/components/auth-form";
 
 export const metadata = {
   title: "Criar conta",
@@ -6,10 +6,5 @@ export const metadata = {
 };
 
 export default function CriarContaPage() {
-  return (
-    <AuthShell
-      title="Criar conta"
-      description="O cadastro vai criar seu usuário, uma organização pessoal e o acesso ao studio. Ainda não está ativo."
-    />
-  );
+  return <AuthForm mode="signup" />;
 }
