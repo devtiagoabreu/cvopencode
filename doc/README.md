@@ -56,8 +56,9 @@ download or regeneration.
 - [x] Design system
 - [x] Frontend scaffolding (App Router, tokens, landing, auth placeholders)
 - [ ] Authentication and tenancy (e-mail+senha, organizações e painel `/admin` funcionando; RLS, verificação de e-mail e convites pendentes)
-- [ ] Client cache, outbox and OPFS media store
+- [ ] Client cache, outbox and OPFS media store (OPFS de imagens pronto; cache/outbox pendentes)
 - [ ] Chats, prompts, agents, skills and contexts
-- [ ] Generation jobs and sync
+- [x] Image generation (Pollinations sync, metadados em `generation`/`asset`, blob em OPFS)
+- [ ] Video generation and async jobs
 - [ ] Admin area
 - [ ] Accessibility audit and tests

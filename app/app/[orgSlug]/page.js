@@ -96,6 +96,12 @@ export default async function WorkspacePage({ params }) {
             <span className="hidden text-sm text-muted-foreground sm:block">
               {session.user.email}
             </span>
+            <Link
+              href={`/app/${orgSlug}/create`}
+              className="text-sm font-medium text-primary hover:underline"
+            >
+              Criar imagem
+            </Link>
             {isPlatformAdmin ? (
               <Link
                 href="/admin"
@@ -160,9 +166,15 @@ export default async function WorkspacePage({ params }) {
             <div className="rounded-lg border border-dashed border-border bg-muted/40 p-5">
               <h2 className="text-h3 font-semibold">Studio em construção</h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                A autenticação e o workspace já funcionam. A próxima entrega é
-                a camada de chats e a geração de mídia.
+                Geração de imagem já está disponível. Chats, vídeo e áudio são
+                as próximas entregas.
               </p>
+              <Link
+                href={`/app/${orgSlug}/create`}
+                className="mt-3 inline-block text-sm font-medium text-primary hover:underline"
+              >
+                Abrir o studio →
+              </Link>
             </div>
           </div>
 

@@ -25,9 +25,10 @@ navegador.
 ## Status
 
 Fase de desenvolvimento. Landing, autenticação por e-mail/senha (Better Auth),
-organizações multi-tenant e página protegida do workspace funcionam. Studio,
-RLS, verificação de e-mail e convites são os próximos passos. Veja o checklist
-em [doc/README.md](doc/README.md#status).
+organizações multi-tenant, painel `/admin` e geração de imagens (Pollinations,
+blob em OPFS e metadados no Postgres) funcionam. Chats, vídeo, RLS, verificação
+de e-mail e convites são os próximos passos. Veja o checklist em
+[doc/README.md](doc/README.md#status).
 
 ## Desenvolvimento
 
